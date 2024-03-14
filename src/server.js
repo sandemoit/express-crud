@@ -1,28 +1,19 @@
-const Hapi = require('@hapi/hapi');
+const express = require('express');
 const routes = require('./routes');
-const dotenv = require('dotenv');
+const dotenv = require("dotenv");
 
+const app = express();
+app.use(express.json());
 dotenv.config();
 
-const init = async () => {
-    const server = Hapi.server({
-        port: process.env.PORT || 3000, // Menetapkan port default 3000 jika tidak ada PORT yang didefinisikan dalam file .env
-        host: process.env.APP_ENV !== 'production' ? 'localhost' : '192.168.43.68',
-        routes: {
-            cors: {
-                origin: ['*'],
-            },
-        },
-    });
+// Iterasi melalui array routes dan mendaftarkan setiap rute
+routes.forEach(route => {
+    app[route.method.toLowerCase()](route.path, route.handler);
+});
 
-    server.route(routes);
+const PORT = process.env.PORT || 3000;
+const HOST = process.env.APP_ENV !== 'production' ? 'localhost' : '192.168.43.68';
 
-    try {
-        await server.start();
-        console.log(`Server berjalan pada ${server.info.uri}`);
-    } catch (error) {
-        console.error('Terjadi kesalahan saat menjalankan server:', error);
-    }
-};
-
-init();
+app.listen(PORT, HOST, () => {
+    console.log(`Server berjalan pada http://${HOST}:${PORT}`);
+});
