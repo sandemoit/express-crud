@@ -1,9 +1,11 @@
 // Layer untuk handle request dan response
 // Biasanya juga handle validasi body
 
+const express = require('express');
+const router = express.Router();
 const productService = require('./product.service');
 
-const getAllProducts = async (req, res) => {
+router.get('/', async (req, res) => {
     try {
         const products = await productService.getAllProducts();
         return res.status(200).json(products);
@@ -11,9 +13,9 @@ const getAllProducts = async (req, res) => {
         console.error(error);
         return res.status(400).json({ error: "Failed to fetch products" });
     }
-};
+});
 
-const getProductById = async (req, res) => {
+router.get('/:id', async (req, res) => {
     try {
         const { id } = req.params;
         const product = await productService.getProductById(id);
@@ -25,9 +27,9 @@ const getProductById = async (req, res) => {
     } catch (error) {
         return res.status(500).json({ error: "Failed to fetch product" });
     }
-};
+});
 
-const addProduct = async (req, res) => {
+router.post('/', async (req, res) => {
     try {
         const newProductData = req.body;
         if (!newProductData) {
@@ -40,9 +42,9 @@ const addProduct = async (req, res) => {
         console.error(error);
         return res.status(400).json({ error: "Failed to create product" });
     }
-};
+});
 
-const deleteProductById = async (req, res) => {
+router.delete('/:id', async (req, res) => {
     try {
         const { id } = req.params;
         await productService.deleteProductById(id);
@@ -51,9 +53,9 @@ const deleteProductById = async (req, res) => {
         console.error(error);
         return res.status(500).json({ error: "Failed to delete product" });
     }
-};
+});
 
-const editProductById = async (req, res) => {
+router.put('/:id', async (req, res) => {
     try {
         const { id } = req.params;
         const { name, description, image, price } = req.body;
@@ -63,9 +65,9 @@ const editProductById = async (req, res) => {
         console.error(error);
         return res.status(500).json({ error: "Failed to update product" });
     }
-};
+});
 
-const patchProductById = async (req, res) => {
+router.patch('/:id', async (req, res) => {
     try {
         const { id } = req.params;
         const { name, description, image, price } = req.body;
@@ -75,13 +77,6 @@ const patchProductById = async (req, res) => {
         console.error(error);
         return res.status(500).json({ error: "Failed to update product" });
     }
-};
+});
 
-module.exports = {
-    getAllProducts,
-    getProductById,
-    addProduct,
-    deleteProductById,
-    editProductById,
-    patchProductById
-};
+module.exports = router;

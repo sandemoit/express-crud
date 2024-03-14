@@ -2,7 +2,7 @@
   "name": "express-tailwind-prisma",
   "version": "1.0.0",
   "description": "belajar bareng theo",
-  "main": "src/server.js",
+  "main": "src/index.js",
   "scripts": {
     "dev": "npx tailwindcss -i ./src/css/input.css -o ./public/css/style.css --watch",
     "bejalan": "nodemon ."

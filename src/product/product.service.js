@@ -5,23 +5,23 @@
 const productRepository = require('./product.repository');
 
 const getAllProducts = async () => {
-    return await productRepository.getAllProducts();
+    return await productRepository.findProducts();
 };
 
 const getProductById = async (id) => {
-    return await productRepository.getProductById(id);
+    return await productRepository.findProductById(id);
 };
 
 const addProduct = async (newProductData) => {
-    return await productRepository.addProduct(newProductData);
+    return await productRepository.insertProduct(newProductData);
 };
 
 const deleteProductById = async (id) => {
-    return await productRepository.deleteProductById(id);
+    return await productRepository.deleteProduct(id);
 };
 
 const editProductById = async (id, updatedProductData) => {
-    return await productRepository.editProductById(id, updatedProductData);
+    return await productRepository.editProduct(id, updatedProductData);
 };
 
 const patchProductById = async (id, updatedProductData) => {
