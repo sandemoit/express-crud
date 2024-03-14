@@ -1,6 +1,8 @@
+// server.js
+
 const express = require('express');
+const dotenv = require('dotenv');
 const routes = require('./routes');
-const dotenv = require("dotenv");
 
 const app = express();
 app.use(express.json());
