@@ -1,4 +1,5 @@
-// src/product/product.controller.js
+// Layer untuk handle request dan response
+// Biasanya juga handle validasi body
 
 const productService = require('./product.service');
 

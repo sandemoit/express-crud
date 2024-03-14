@@ -4,7 +4,7 @@ const {
     getProductByIdHandler, 
     editProductByIdHandler, 
     deleteProductByIdHandler,
-    patchProductByIdHandler
+    patchProductByIdHandler,
 } = require('./index');
 const routes = [
     {

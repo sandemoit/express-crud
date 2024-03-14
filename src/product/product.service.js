@@ -1,4 +1,7 @@
-// src/product/product.service.js
+// Service layer bertujuan untuk handle business logic
+// Kenapa dipisah? Supaya tanggung jawabnya ter-isolate, dan functions-nya
+// reusable
+
 const productRepository = require('./product.repository');
 
 const getAllProducts = async () => {
