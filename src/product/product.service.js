@@ -13,6 +13,12 @@ const getProductById = async (id) => {
 };
 
 const addProduct = async (newProductData) => {
+    const findProducts = await findProductByName(newProductData.name);
+
+    if(findProducts){
+        throw new Error('Product already exists');
+    }
+
     return await productRepository.insertProduct(newProductData);
 };
 

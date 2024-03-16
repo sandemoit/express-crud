@@ -40,11 +40,18 @@ const patchProductById = async (id, updatedProductData) => {
     });
 };
 
+const findProductByName = async (name) => {
+    return await prisma.product.findFirst({
+        where: { name: name }
+    });
+}
+
 module.exports = {
     findProducts,
     findProductById,
     insertProduct,
     deleteProduct,
     editProduct,
-    patchProductById
+    patchProductById,
+    findProductByName
 };

@@ -59,6 +59,10 @@ router.put('/:id', async (req, res) => {
     try {
         const { id } = req.params;
         const { name, description, image, price } = req.body;
+        if(!(name && description && image && price)) {
+            return res.status(400).json({ error: "Fields are missing" });
+        }
+
         const product = await productService.editProductById(id, { name, description, image, price });
         return res.status(200).json({ data: product, message: "Product updated successfully" });
     } catch (error) {
